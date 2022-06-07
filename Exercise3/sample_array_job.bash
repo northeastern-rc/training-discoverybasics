@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=reservation
-#SBATCH --reservation=bootcamp_gpu_2022 
+#SBATCH --reservation=bootcamp_cpu_2022 
 #SBATCH --job-name=test_array
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
