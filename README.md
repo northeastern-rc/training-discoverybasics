@@ -4,7 +4,6 @@ Basics training modules. The sub-folders are based on the date the
 training session was conducted.
 
 ## What's in each training sub-folder?
-* Training PowerPoint slides
 * Exercise folders
 
 ## Steps to download and use the repo on Discovery
