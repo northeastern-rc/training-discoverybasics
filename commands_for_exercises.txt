@@ -21,7 +21,7 @@ srun --pty /bin/bash
 srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=express --pty /bin/bash
 
 # Using the reservation
-srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=reservation --reservation=fall_training_cpu_2022 --pty /bin/bash
+srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=reservation --reservation=bootcamp_cpu_2022 --pty /bin/bash
 
 # Monitor jobs
 squeue –u <username>
@@ -41,7 +41,7 @@ sacctmgr show associations where user=<username>
 #!/bin/bash
 
 #SBATCH --partition=reservation                                                                                                                        
-#SBATCH --reservation=fall_training_cpu_2022 
+#SBATCH --reservation=bootcamp_cpu_2022 
 #SBATCH --job-name=test
 #SBATCH --time=00:05:00
 #SBATCH –-nodes=1
@@ -62,7 +62,7 @@ sbatch sample.bash
 ## Exercise 3:
 #!/bin/bash
 #SBATCH --partition=reservation                                                                                                                        
-#SBATCH --reservation=fall_training_cpu_2022                                                                                                                
+#SBATCH --reservation=bootcamp_cpu_2022                                                                                                                
 #SBATCH --job-name=test_array                                                                                                                          
 #SBATCH --time=00:05:00                                                                                                                                
 #SBATCH --nodes=1                                                                                                                                      
