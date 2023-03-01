@@ -20,9 +20,6 @@ srun --pty /bin/bash
 # Requested resources
 srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=express --pty /bin/bash
 
-# Using the reservation
-srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=reservation --reservation=fall_training_cpu_2022 --pty /bin/bash
-
 # Monitor jobs
 squeue –u <username>
 scontrol show jobid -d <job_id>
@@ -40,18 +37,13 @@ sacctmgr show associations where user=<username>
 ## Exercise 2:
 #!/bin/bash
 
-#SBATCH --partition=reservation                                                                                                                        
-#SBATCH --reservation=fall_training_cpu_2022 
+#SBATCH --partition=short
 #SBATCH --job-name=test
 #SBATCH --time=00:05:00
 #SBATCH –-nodes=1
 #SBATCH –-cpus-per-task=1
 #SBATCH --output=%j.output
 #SBATCH --error=%j.error
-
-# Use a regular partition, such as express, when not in a training                                                                                     
-# session                                                                                                                                              
-##SBATCH --partition=express
 
 echo "HELLO WORLD!”
 
@@ -61,8 +53,7 @@ sbatch sample.bash
 
 ## Exercise 3:
 #!/bin/bash
-#SBATCH --partition=reservation                                                                                                                        
-#SBATCH --reservation=fall_training_cpu_2022                                                                                                                
+#SBATCH --partition=short
 #SBATCH --job-name=test_array                                                                                                                          
 #SBATCH --time=00:05:00                                                                                                                                
 #SBATCH --nodes=1                                                                                                                                      
@@ -70,10 +61,6 @@ sbatch sample.bash
 #SBATCH --output=%A_%a.output
 #SBATCH --error=%A_%a.error
 #SBATCH --array=1-4%4 #run a 4-job array, 4 jobs will launched at the same time.
-
-# Use a regular partition, such as express, when not in a training
-# session
-##SBATCH --partition=express
 
 echo "Job array ID: $SLURM_ARRAY_JOB_ID , sub-job $SLURM_ARRAY_TASK_ID is running!"
 
