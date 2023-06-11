@@ -17,8 +17,15 @@ rm <desired-location/filename>
 # Default resources
 srun --pty /bin/bash
 
-# Requested resources
+#####Use after training##############
 srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=express --pty /bin/bash
+#####################################
+
+#####Use during training###############
+# Requested resources
+srun --nodes=1 --ntasks=10 --cpus-per-task=2 --mem=2G --time=01:00:00 --partition=reservation --reservation=bootcamp_cpu_2023 --pty /bin/bash
+#######################################
+
 
 # Monitor jobs
 squeue –u <username>
@@ -34,6 +41,7 @@ scancel <job_id>
 # See account details
 sacctmgr show associations where user=<username>
 
+#####Use after training############
 ## Exercise 2:
 #!/bin/bash
 
@@ -44,13 +52,29 @@ sacctmgr show associations where user=<username>
 #SBATCH –-cpus-per-task=1
 #SBATCH --output=%j.output
 #SBATCH --error=%j.error
+###################################
+
+#####Use during training###########
+
+## Exercise 2:
+#!/bin/bash
+
+#SBATCH --partition=reservation
+#SBATCH --reservation=bootcamp_cpu_2023
+#SBATCH --job-name=test
+#SBATCH --time=00:05:00
+#SBATCH –-nodes=1
+#SBATCH –-cpus-per-task=1
+#SBATCH --output=%j.output
+#SBATCH --error=%j.error
+##################################
 
 echo "HELLO WORLD!”
 
 # Submit job
 sbatch sample.bash
 
-
+#####Use after training##############
 ## Exercise 3:
 #!/bin/bash
 #SBATCH --partition=short
@@ -61,6 +85,22 @@ sbatch sample.bash
 #SBATCH --output=%A_%a.output
 #SBATCH --error=%A_%a.error
 #SBATCH --array=1-4%4 #run a 4-job array, 4 jobs will launched at the same time.
+######################################
+
+
+#####Use during training###############
+## Exercise 3:
+#!/bin/bash
+#SBATCH --partition=reservation
+#SBATCH --reservation=bootcamp_cpu_2023
+#SBATCH --job-name=test_array                                                                                                                          
+#SBATCH --time=00:05:00                                                                                                                                
+#SBATCH --nodes=1                                                                                                                                      
+#SBATCH --cpus-per-task=1
+#SBATCH --output=%A_%a.output
+#SBATCH --error=%A_%a.error
+#SBATCH --array=1-4%4 #run a 4-job array, 4 jobs will launched at the same time.
+#####################################
 
 echo "Job array ID: $SLURM_ARRAY_JOB_ID , sub-job $SLURM_ARRAY_TASK_ID is running!"
 
